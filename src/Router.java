@@ -7,7 +7,7 @@ public class Router {
         semaphore = new Semaphore(maxDevices);
     }
 
-    public synchronized int occupy(Device device) {
+    public int occupy(Device device) {
         semaphore.wait(device);
         for (int i = 0; i < isConnected.length; i++) {
             if(!isConnected[i]){
@@ -21,6 +21,7 @@ public class Router {
 
     public void release(Device device) {
         isConnected[device.getConnectionID() - 1] = false;
+        device.setRouter(null);
         semaphore.signal(device);
     }
 }

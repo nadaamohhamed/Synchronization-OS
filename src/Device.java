@@ -29,6 +29,10 @@ public class Device extends Thread {
         }
     }
 
+    public void setRouter(Router router) {
+        this.router = router;
+    }
+
     public String getDeviceName() {
         return deviceName;
     }
