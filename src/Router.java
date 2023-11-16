@@ -19,8 +19,11 @@ public class Router {
         return -1;
     }
 
+    public boolean[] getIsConnected() {
+        return isConnected;
+    }
+
     public void release(Device device) {
-        isConnected[device.getConnectionID() - 1] = false;
-        semaphore.signal(device);
+        semaphore.signal(device, this);
     }
 }

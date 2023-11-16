@@ -18,7 +18,8 @@ class Semaphore {
             System.out.println("(" + device.getDeviceName() + ") " + "(" + device.getType() + ") arrived");
     }
 
-    public synchronized void signal(Device device) {
+    public synchronized void signal(Device device, Router router) {
+        router.getIsConnected()[device.getConnectionID() - 1] = false;
         System.out.println("Connection " + device.getConnectionID() + ": " + device.getDeviceName() + " logged out");
         value++;
         if (value <= 0)
