@@ -3,7 +3,11 @@ class Semaphore {
     public Semaphore(int value) {
         this.value = value;
     }
-    public synchronized void Wait (Device device) {
+
+    public int getValue() {
+        return value;
+    }
+    public synchronized void Wait () {
         value--;
         if (value < 0) {
             try {
@@ -14,6 +18,6 @@ class Semaphore {
     public synchronized void Signal() {
         value++;
         if (value <= 0)
-            notify() ;
+            notify();
     }
 }
