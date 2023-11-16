@@ -1,29 +1,26 @@
 public class Router {
-    private int maxDevices;
-    private boolean[] isConnected;
     private Semaphore semaphore;
+    private boolean[] isConnected;
 
-    Router(int maxDevices) {
-        this.maxDevices = maxDevices;
-        semaphore = new Semaphore(maxDevices);
+    public Router(int maxDevices) {
         isConnected = new boolean[maxDevices];
+        semaphore = new Semaphore(maxDevices);
     }
-    public synchronized void occupy(Device device) {
-        for (int i = 0; i < maxDevices; i++) {
+
+    public synchronized int occupy(Device device) {
+        semaphore.wait(device);
+        for (int i = 0; i < isConnected.length; i++) {
             if(!isConnected[i]){
-                device.setConnectionID(i+1);
                 isConnected[i] = true;
-                break;
+                System.out.println("Connection " + (i+1) + ": (" + device.getDeviceName() + ") Occupied");
+                return i + 1;
             }
         }
+        return -1;
     }
 
-    public synchronized void release(Device device){
+    public void release(Device device) {
         isConnected[device.getConnectionID() - 1] = false;
-        notify();
-        System.out.println("Connection " + device.getConnectionID() + ": " + device.getDeviceName() + " Logged out");
-    }
-    public synchronized void arrived(Device device){
-        System.out.println("(" + device.getDeviceName() + ") " +" (" + device.getType() + ") " +" arrived");
+        semaphore.signal(device);
     }
 }
