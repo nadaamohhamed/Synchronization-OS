@@ -21,7 +21,6 @@ public class Router {
 
     public void release(Device device) {
         isConnected[device.getConnectionID() - 1] = false;
-        device.setRouter(null);
         semaphore.signal(device);
     }
 }

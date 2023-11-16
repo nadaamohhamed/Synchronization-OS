@@ -1,5 +1,4 @@
 public class Device extends Thread {
-
     private Router router;
     private  String deviceName;
     private  String type;
@@ -9,7 +8,6 @@ public class Device extends Thread {
         deviceName = name;
         this.type = type;
         this.router = router;
-        connectionID = 1;
     }
 
     public int getConnectionID() {
@@ -27,10 +25,6 @@ public class Device extends Thread {
             router.release(this);
         } catch (InterruptedException e) {
         }
-    }
-
-    public void setRouter(Router router) {
-        this.router = router;
     }
 
     public String getDeviceName() {
