@@ -7,16 +7,8 @@ public class Router {
         semaphore = new Semaphore(maxDevices);
     }
 
-    public int occupy(Device device) {
+    public void occupy(Device device) {
         semaphore.wait(device);
-        for (int i = 0; i < isConnected.length; i++) {
-            if(!isConnected[i]){
-                isConnected[i] = true;
-                System.out.println("Connection " + (i+1) + ": (" + device.getDeviceName() + ") Occupied");
-                return i + 1;
-            }
-        }
-        return -1;
     }
 
     public boolean[] getIsConnected() {

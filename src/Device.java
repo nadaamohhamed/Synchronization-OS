@@ -14,10 +14,18 @@ public class Device extends Thread {
         return connectionID;
     }
 
+    public Router getRouter() {
+        return router;
+    }
+
+    public void setConnectionID(int connectionID) {
+        this.connectionID = connectionID;
+    }
+
     @Override
     public void run() {
         try {
-            connectionID = router.occupy(this);
+            router.occupy(this);
             System.out.println("Connection " + connectionID + ": " + deviceName + " logged in");
             Thread.sleep(100);
             System.out.println("Connection " + connectionID + ": (" + deviceName + ") (" + type + ") performs online activity");

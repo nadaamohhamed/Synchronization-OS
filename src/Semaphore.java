@@ -16,6 +16,15 @@ class Semaphore {
         }
         else
             System.out.println("(" + device.getDeviceName() + ") " + "(" + device.getType() + ") arrived");
+
+        for (int i = 0; i < device.getRouter().getIsConnected().length; i++) {
+            if(!device.getRouter().getIsConnected()[i]){
+                device.getRouter().getIsConnected()[i] = true;
+                device.setConnectionID(i+1);
+                System.out.println("Connection " + (i+1) + ": (" + device.getDeviceName() + ") Occupied");
+                break;
+            }
+        }
     }
 
     public synchronized void signal(Device device, Router router) {
