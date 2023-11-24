@@ -1,3 +1,7 @@
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 class Router{
@@ -113,6 +117,12 @@ public class Network {
         for (int i = 0; i < numOfDevices; i++) {
             String name = input.next(), type = input.next();
             devices.add(new Device(name, type, semaphore, router, new Random().nextInt(5000 - 2000) + 2000));
+        }
+        try {
+            System.setOut(new PrintStream(new BufferedOutputStream((new FileOutputStream("output.txt"))), true));
+        }
+        catch (FileNotFoundException e){
+
         }
         for (int i = 0; i < numOfDevices; i++) {
             devices.get(i).start();
