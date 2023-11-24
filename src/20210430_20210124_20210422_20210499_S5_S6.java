@@ -98,7 +98,7 @@ class Device extends Thread {
 }
 
 
-public class Network {
+class Network {
     public static void main(String[] args) {
 
         int  numOfConnections, numOfDevices;
