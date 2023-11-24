@@ -112,7 +112,7 @@ public class Network {
 
         for (int i = 0; i < numOfDevices; i++) {
             String name = input.next(), type = input.next();
-            devices.add(new Device(name, type, semaphore, router, new Random().nextInt(60000 - 10000) + 10000));
+            devices.add(new Device(name, type, semaphore, router, new Random().nextInt(5000 - 2000) + 2000));
         }
         for (int i = 0; i < numOfDevices; i++) {
             devices.get(i).start();
